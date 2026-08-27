@@ -1,0 +1,21 @@
+# models/*.pt
+models/*.onnx
+
+
+# Outputs de inferência
+output/
+
+
+# Python
+_pycache_/
+*.pyc
+.pytest_cache/
+.venv/
+
+
+# Imagens de teste 
+images/
+
+
+
+.env

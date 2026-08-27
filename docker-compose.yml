@@ -1,0 +1,19 @@
+services:
+  yolo-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: yolo-api-container
+    ports:
+      - "8000:8000"
+    privileged: true
+    devices:
+      - "/dev/video0:/dev/video0"
+      - "/dev/vchiq:/dev/vchiq"
+      - "/dev/dma_heap:/dev/dma_heap"
+    volumes:
+      - ./app:/app/app
+      - /run/udev:/run/udev:ro
+      - /dev:/dev
+      - /run/dbus/system_bus_socket:/run/dbus/system_bus_socket:ro
+    restart: always
