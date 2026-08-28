@@ -1,6 +1,16 @@
 import torch
 import ultralytics
 from ultralytics import YOLO
+import os
+
+# Permite o carregamento completo do modelo em versões do PyTorch >= 2.6
+os.environ["TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD"] = "1"
+
+# Adiciona a classe Sequential aos globais seguros do PyTorch
+try:
+    torch.serialization.add_safe_globals([torch.nn.modules.container.Sequential])
+except AttributeError:
+    pass
 
 # Permite que o PyTorch 2.6+ carregue as classes do Ultralytics com seguranca
 try:
