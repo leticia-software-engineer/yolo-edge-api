@@ -1,10 +1,10 @@
-from typing import List, Optional
+
 from pydantic import BaseModel
 
 
 class PredictRequest(BaseModel):
-    image_base64: Optional[str] = None
-    image_url: Optional[str] = None
+    image_base64: str | None = None
+    image_url: str | None = None
     model_name: str = "yolov8n.pt"
     confidence: float = 0.25
 
@@ -12,11 +12,11 @@ class PredictRequest(BaseModel):
 class Detection(BaseModel):
     label: str
     confidence: float
-    bbox: List[float]
+    bbox: list[float]
 
 
 class PredictResponse(BaseModel):
-    detections: List[Detection]
+    detections: list[Detection]
     inference_ms: float
     model_used: str
     image_width: int
@@ -24,13 +24,13 @@ class PredictResponse(BaseModel):
 
 
 class BatchPredictRequest(BaseModel):
-    images_base64: List[str]
+    images_base64: list[str]
     model_name: str = "yolov8n.pt"
     confidence: float = 0.25
 
 
 class BatchPredictResponse(BaseModel):
-    results: List[PredictResponse]
+    results: list[PredictResponse]
     total_inference_ms: float
 
 

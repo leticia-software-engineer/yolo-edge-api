@@ -1,7 +1,8 @@
+import os
+
 import torch
 import ultralytics
 from ultralytics import YOLO
-import os
 
 # Permite o carregamento completo do modelo em versões do PyTorch >= 2.6
 os.environ["TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD"] = "1"

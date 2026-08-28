@@ -1,28 +1,27 @@
+import asyncio
 import base64
 import io
-import time
+import json
 import subprocess
-from pathlib import Path
-from fastapi import FastAPI, HTTPException, Response, Query, Request
-from fastapi.responses import HTMLResponse, StreamingResponse
-import asyncio
-from PIL import Image
-import numpy as np
-import httpx
+import time
+import uuid
+
 import cv2
+import httpx
+import numpy as np
+from fastapi import FastAPI, HTTPException, Query, Request, Response
+from fastapi.responses import HTMLResponse, StreamingResponse
+from model import get_default_model_name, load_model
+from PIL import Image
 from schemas import (
-    PredictRequest,
-    PredictResponse,
     BatchPredictRequest,
     BatchPredictResponse,
+    Detection,
     HealthResponse,
     MetricsResponse,
-    Detection,
+    PredictRequest,
+    PredictResponse,
 )
-from model import load_model, get_default_model_name
-
-import json
-import uuid
 
 
 def log_event(event: str, level: str = "INFO", **kwargs):
