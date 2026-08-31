@@ -19,3 +19,6 @@ images/
 
 
 .env
+preprocessing/outputs/
+_pycache_/
+runs/
