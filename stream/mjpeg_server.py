@@ -11,7 +11,9 @@ from pathlib import Path
 import cv2
 from flask import Flask, Response
 
-sys.path.insert(0, str(Path(__file__).parent.parent))
+# Adiciona o diretório raiz (/app) no PYTHONPATH em tempo de execução
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+#sys.path.insert(0, str(Path(__file__).parent.parent))
 from stream.v3_optimized import OptimizedCamera, RealtimeDetector
 
 app = Flask(__name__)

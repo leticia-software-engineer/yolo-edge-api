@@ -19,6 +19,7 @@ import cv2
 import numpy as np
 import torch
 from ultralytics import YOLO
+from preprocessing.preprocessor import Preprocessor, PreprocessConfig
 
 _orig_torch_load = torch.load
 
@@ -30,8 +31,7 @@ def _patched_torch_load(*args, **kwargs):
 
 
 torch.load = _patched_torch_load
-sys.path.insert(0, str(Path(__file__).parent.parent))
-
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 class OptimizedCamera:
     """
@@ -155,10 +155,9 @@ class RealtimeDetector:
         self.infer_every = infer_every
         self.infer_size = infer_size
 
+        from preprocessing.preprocessor import Preprocessor, PreprocessConfig
 
-	from preprocessing.preprocessor import Preprocessor, PreprocessConfig
-
-	self.preprocessor = Preprocessor(PreprocessConfig(infer_size=infer_size))
+        self.preprocessor = Preprocessor(PreprocessConfig(infer_size=infer_size))
 
         self._frame_idx = 0
         self._last_boxes = []  # [(label, conf, x1,y1,x2,y2), ...]
@@ -184,7 +183,7 @@ class RealtimeDetector:
         self._fps_window.append(dt)
 
         # ── Inferência (apenas a cada N frames) ──────────────
-	if self._frame_idx % self.infer_every == 0:
+        if self._frame_idx % self.infer_every == 0:
             preproc_result = self.preprocessor.process(frame)
 
             t0 = time.perf_counter()
