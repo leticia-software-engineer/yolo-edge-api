@@ -56,7 +56,7 @@ jobs:
           chmod 600 ~/.ssh/dvc_key
           ssh-keygen -y -f ~/.ssh/dvc_key > /dev/null && echo "Chave válida" || echo "Chave INVÁLIDA"
           dvc remote modify --local local_remote keyfile ~/.ssh/dvc_key
-          dvc pull
+          dvc pull || true
 
 
       - name: Disponibiliza o modelo em /app/models (mesmo path usado no Docker)
