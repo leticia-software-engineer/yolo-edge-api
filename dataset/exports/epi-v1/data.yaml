@@ -1,4 +1,4 @@
-path: /home/leticia/yolo-edge-api/dataset/exports/epi-v1
+#path: /home/leticia/yolo-edge-api/dataset/exports/epi-v1
 train: ../train/images
 val: ../valid/images
 test: ../test/images
